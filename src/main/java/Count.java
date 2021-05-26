@@ -13,7 +13,14 @@ public class Count extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         count++;
-        response.getWriter().println("<h1>You are the " + count + " visitor to this site!</h1>");
 
+        String reset = request.getParameter("reset");
+
+        if(reset != null) {
+            count = 0;
+        }
+
+        response.setContentType("text/html");
+        response.getWriter().println("<h2>You are the " + count + " visitor to this site!</h2>");
     }
 }
