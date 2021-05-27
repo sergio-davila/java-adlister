@@ -35,6 +35,9 @@
             <p>YOURE IN!</p>
             <c:redirect url="/profile.jsp"/>
         </c:when>
+        <c:when test="${param.username == null && param.password == null}">
+            <p>Hello</p>
+        </c:when>
         <c:otherwise>
             <p>YOURE NOT IN LOL</p>
         </c:otherwise>
