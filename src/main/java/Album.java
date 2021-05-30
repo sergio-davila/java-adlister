@@ -5,10 +5,10 @@ public class Album implements Serializable {
     private String artist;
     private String name;
     private int releaseDate;
-    private float sales;
+    private double sales;
     private String genre;
 
-    public Album(int id, String artist, String name, int releaseDate, float sales, String genre){
+    public Album(int id, String artist, String name, int releaseDate, double sales, String genre){
         this.id = id;
         this.artist = artist;
         this.name = name;
@@ -16,6 +16,8 @@ public class Album implements Serializable {
         this.sales = sales;
         this.genre = genre;
     }
+
+    public Album() {}
 
     public int getId() {
         return id;
@@ -49,7 +51,7 @@ public class Album implements Serializable {
         this.releaseDate = releaseDate;
     }
 
-    public float getSales() {
+    public double getSales() {
         return sales;
     }
 

@@ -9,6 +9,8 @@ public class Author {
         this.lastName = lastName;
     }
 
+    public Author() {}
+
     public int getId() {
         return id;
     }
