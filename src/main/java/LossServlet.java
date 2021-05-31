@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Random;
 
-@WebServlet(name = "ControllerServlet", urlPatterns = "/guess")
-public class ControllerServlet extends HttpServlet {
+@WebServlet(name = "LossServlet", urlPatterns = "/loss")
+public class LossServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,3 +29,4 @@ public class ControllerServlet extends HttpServlet {
         response.sendRedirect("/guess.jsp");
     }
 }
+
