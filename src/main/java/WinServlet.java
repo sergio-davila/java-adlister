@@ -11,21 +11,22 @@ public class WinServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Random random = new Random();
-        int randomNum = random.nextInt(3 + 1) + 1;
-        String randomNumString = Integer.toString(randomNum);
-        String guess = request.getParameter("guess");
-
-        if(guess.equals(randomNumString)) {
-            response.sendRedirect("/.jsp");
-        } else {
-            response.sendRedirect("/guess.jsp");
-        }
+//        Random random = new Random();
+//        int randomNum = random.nextInt(3 + 1) + 1;
+//        String randomNumString = Integer.toString(randomNum);
+//        String guess = request.getParameter("guess");
+//
+//        if(guess.equals(randomNumString)) {
+//            response.sendRedirect("/.jsp");
+//        } else {
+//            response.sendRedirect("/guess.jsp");
+//        }
+        request.setAttribute("win", "YA DID IT YAY");
 
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/guess.jsp");
+        response.sendRedirect("/outcome.jsp");
     }
 }

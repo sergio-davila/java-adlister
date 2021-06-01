@@ -11,6 +11,7 @@
     <title>Outcome</title>
 </head>
 <body>
-    <h1>${hello}</h1>
+    <h1>${"win"}</h1>
+    <h1>${"outcome"}</h1>
 </body>
 </html>

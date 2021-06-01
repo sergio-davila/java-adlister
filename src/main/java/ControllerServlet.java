@@ -17,9 +17,9 @@ public class ControllerServlet extends HttpServlet {
         String guess = request.getParameter("guess");
 
         if(guess.equals(randomNumString)) {
-            response.sendRedirect("/.jsp");
+            response.sendRedirect("/win");
         } else {
-            response.sendRedirect("/guess.jsp");
+            response.sendRedirect("/loss");
         }
 
     }
