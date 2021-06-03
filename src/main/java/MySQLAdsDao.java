@@ -5,36 +5,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MySQLAdsDao implements Ads{
-    Config config = new Config();
-    Connection connection;
-//    DriverManager.registerDriver(new Driver());
-//    Connection connection = DriverManager.getConnection(
-//            config.getUrl(),
-//            config.getUser(),
-//            config.getPassword()
-//    );
+//    Config config = new Config();
+    private Connection connection;
 
-    public MySQLAdsDao() throws SQLException {
-        Config config = new Config();
-        try {
-            DriverManager.registerDriver(new Driver());
-            connection = DriverManager.getConnection(
-                    config.getUrl(),
-                    config.getUser(),
-                    config.getPassword()
-            );
-        } catch (SQLException e){
-//            throw new RuntimeException("Error connecting to SQL database!", e);
-            e.printStackTrace();
-        }
+
+    public MySQLAdsDao(Config config) throws SQLException {
+//        try {
+        DriverManager.registerDriver(new Driver());
+        connection = DriverManager.getConnection(
+                config.getUrl(),
+                config.getUser(),
+                config.getPassword()
+        );
     }
+//        } catch (SQLException e){
+////            throw new RuntimeException("Error connecting to SQL database!", e);
+//            e.printStackTrace();
+//        }
+//    }
 
     @Override
     public List<Ad> all() {
         try{
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM ads");
-            return createProductsFromResults(rs);
+            return createAdsFromResults(rs);
         } catch (SQLException e) {
             throw new RuntimeException("Error retrieving all ads.", e);
         }
@@ -43,22 +38,22 @@ public class MySQLAdsDao implements Ads{
     private Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(
                 rs.getInt("id"),
-                rs.getInt("user_id"),
+//                rs.getInt("user_id"),
                 rs.getString("title"),
                 rs.getString("description")
         );
     }
 
-    private List<Ad> createProductsFromResults(ResultSet rs) throws SQLException {
-        List<Ad> products = new ArrayList<>();
+    private List<Ad> createAdsFromResults(ResultSet rs) throws SQLException {
+        List<Ad> ads = new ArrayList<>();
         while (rs.next()) {
-            products.add(extractAd(rs));
+            ads.add(extractAd(rs));
         }
-        return products;
+        return ads;
     }
 
     @Override
-    public void insert(Ad ad) {
+    public Long insert(Ad ad) {
         try {
             Statement statement = connection.createStatement();
             String query = "INSERT INTO ads(title, description) VALUES (" + "'" + ad.getTitle() + "'" + ", " + ad.getDescription() + "'" + ")";
@@ -67,6 +62,7 @@ public class MySQLAdsDao implements Ads{
             ResultSet resultSet = statement.getGeneratedKeys();
             resultSet.next();
             System.out.println("Created new ad with ID of: " + resultSet.getLong(1));
+            return resultSet.getLong(1);
         } catch (SQLException e) {
             throw new RuntimeException("Error creating a new ad.", e);
         }
