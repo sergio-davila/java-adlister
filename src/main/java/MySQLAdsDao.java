@@ -5,9 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MySQLAdsDao implements Ads{
+    Config config = new Config();
     Connection connection;
+//    DriverManager.registerDriver(new Driver());
+//    Connection connection = DriverManager.getConnection(
+//            config.getUrl(),
+//            config.getUser(),
+//            config.getPassword()
+//    );
 
-    public MySQLAdsDao() {
+    public MySQLAdsDao() throws SQLException {
         Config config = new Config();
         try {
             DriverManager.registerDriver(new Driver());
@@ -63,5 +70,9 @@ public class MySQLAdsDao implements Ads{
         } catch (SQLException e) {
             throw new RuntimeException("Error creating a new ad.", e);
         }
+    }
+
+    public static void main(String[] args) {
+
     }
 }
